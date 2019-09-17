@@ -5,7 +5,9 @@ import { Expense } from 'src/app/models/expense';
 import { Mission } from 'src/app/models/mission';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ReaderjsonService } from 'src/app/providers/readerjson.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -24,7 +26,7 @@ export class ExpenseDetailsPage implements OnInit {
 
   missions: Mission[];
 
-  constructor(private authService: AuthenticationService, private apiService: ApiService, public expenseService: ExpensesService, router: Router, private navCtrl: NavController) {
+  constructor(private authService: AuthenticationService, private apiService: ApiService, public expenseService: ExpensesService, router: Router, private navCtrl: NavController, public readerjsonService: ReaderjsonService) {
     this.expenseTypes = this.expenseService.expenseTypes;
     this.router = router;
   }
@@ -33,6 +35,8 @@ export class ExpenseDetailsPage implements OnInit {
     this.apiService.readMissions(this.authService.user.userEmail).subscribe((missions: Mission[]) => {
       this.missions = missions;
     });
+
+    this.readerjsonService.getRemoteData();
   }
 
   missionSelected() {
@@ -76,4 +80,5 @@ export class ExpenseDetailsPage implements OnInit {
   public goBack(animated = true) {
     this.navCtrl.back();
   }
+
 }
