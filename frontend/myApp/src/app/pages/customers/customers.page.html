@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Customers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label (click)="showFilters()"><ion-icon name="options"></ion-icon></ion-label>
+  <div>
+    <ion-chip [hidden]="activedMission" outline="" color="tertiary">
+      <ion-icon name="star-outline" size="small"></ion-icon>
+      <ion-label class="filter">{{missionName}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(missionName)"></ion-icon>
+    </ion-chip>
+    <ion-chip [hidden]="activedSociety" outline="" color="success">
+      <ion-icon name="star-outline" size="small"></ion-icon>
+      <ion-label class="filter">{{societyName}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(societyName)"></ion-icon>
+    </ion-chip>
+  </div>
+    <form [hidden]="activedFilters" #f = "ngForm" (ngSubmit)="filterCustomer(f)">
+      <ion-item>
+        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission" [selectedText]="selectedMissionName">
+          <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
+            {{mission.missionName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select [(ngModel)]="societyName" name="societyName" multiple="false" placeholder="Société" [selectedText]="selectedSocietyName">
+          <ion-select-option *ngFor="let mission of missions" value="{{mission.societyName}}">
+            {{mission.societyName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button type="submit" color="primary">Filtrer</ion-button>
+    </form>
+    
+  <ion-card *ngFor="let mission of missions">
+    <ion-card-content (click)="selectCustomer(mission)">
+      Client : {{ mission.customerLastName }} {{ mission.customerFirstName }}<br/>
+      Société : {{ mission.societyName }}<br/>
+      Mission : {{ mission.missionName }}
+    </ion-card-content>
+  </ion-card>
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button>
+      <ion-icon class="btnDelete"name="add" size="large" (click)="createCustomer()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

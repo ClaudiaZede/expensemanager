@@ -1,0 +1,52 @@
+ion-content {
+  --padding-bottom: 0px;
+  --padding-end: 0px;
+  --padding-start: 0px;
+  --padding-top: 20px;
+}
+
+ion-label {
+  padding: 0px 15px;
+}
+
+ion-item {
+  padding-top: 15px;
+}
+
+ion-button{
+  position: absolute;
+  right: 15px;
+}
+
+ion-icon{
+  font-size: 24px;
+}
+
+ion-chip{
+  vertical-align: middle;
+}
+
+div{
+  margin-left: 12px;
+}
+
+.filter {
+  padding: 0px !important;
+}
+
+form{
+  padding: 15px 15px 40px 15px;
+}
+
+.btnDelete {
+  right: 0;
+  bottom: 0;
+}
+
+.btnDelete ion-fab-button{
+  --background: var(--ion-color-light);
+  --border-color: var(--ion-color-light);
+  --border-radius: 0px;
+  --border-style: none;
+  --box-shadow: 0px 0px;
+}

@@ -1,0 +1,32 @@
+ion-content {
+    --padding-top: 20vh;
+}
+
+ion-img {
+    margin: auto;
+    width: 100px;
+}
+ion-button {
+    display: block;
+    width: 99vw;
+    position: fixed;
+    bottom: 12vh;
+}
+  
+div {
+    margin-left: 8px;
+    color: var(--ion-color-danger);
+}
+  
+.select {
+    display: flex;
+    justify-content: space-between;
+}
+:host {
+    .item-interactive.ion-invalid {
+      --highlight-background: none !important;
+    }
+    .item-interactive.ion-valid {
+      --highlight-background: none !important;
+    }
+}

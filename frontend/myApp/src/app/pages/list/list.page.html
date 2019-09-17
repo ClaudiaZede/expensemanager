@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>Notes de frais</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label (click)="showFilters()"><ion-icon name="options"></ion-icon></ion-label>
+  <div>
+    <ion-chip [hidden]="activedMission" outline="" color="warning">
+      <ion-icon name="star-outline" size="small"></ion-icon>
+      <ion-label class="filter">{{missionName}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(missionName)"></ion-icon>
+    </ion-chip>
+    <ion-chip [hidden]="activedExpensetype" outline="" color="success">
+      <ion-icon name="cash" size="small"></ion-icon>
+      <ion-label class="filter">{{expenseType}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(expenseType)"></ion-icon>
+    </ion-chip>
+    <ion-chip [hidden]="activedExpenseStatus" outline="" color="danger">
+      <ion-icon name="cash" size="small"></ion-icon>
+      <ion-label class="filter">{{expenseStatus}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(expenseStatus)"></ion-icon>
+    </ion-chip>
+    <ion-chip [hidden]="activedExpenseDate" outline="" color="tertiary">
+      <ion-icon name="calendar" size="small"></ion-icon>
+      <ion-label class="filter">{{expenseDate | date:'y/MM/dd'}}</ion-label>
+      <ion-icon name="close-circle" (click)="dismissFilter(expenseDate)"></ion-icon>
+    </ion-chip>
+  </div>
+    <form [hidden]="activedFilters" #f = "ngForm" (ngSubmit)="filterExpenses(f)">
+      <ion-item>
+        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission" [selectedText]="selectedMissionName">
+          <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
+            {{mission.missionName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select [(ngModel)]="expenseType" name="expenseType" multiple="false" placeholder="Type">
+          <ion-select-option *ngFor="let type of expenseTypes" value="{{type}}">
+            {{type}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select [(ngModel)]="expenseStatus" name="expenseStatus" multiple="false" placeholder="Status">
+          <ion-select-option *ngFor="let status of expensesStatus" value="{{status}}">
+            {{status}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-datetime type="text" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="expenseDate" name="expenseDate" placeholder="Date"></ion-datetime>
+      </ion-item>
+      <ion-button type="submit" color="primary">Filtrer</ion-button>
+    </form>
+    
+  <ion-card *ngFor="let expense of expenses" [disabled]="expense.expenseStatus==='Remboursé'" >
+    <ion-item (click)="selectExpense(expense)">
+      Date : {{ expense.expenseDate }}<br/>
+      Mission : {{ expense.missionName}}<br/>
+      Client : {{ expense.customerLastName }} {{ expense.customerFirstName }}<br/>
+      Type : {{ expense.expenseType }}
+    </ion-item>
+    <ion-card-content>
+      Total : {{ expense.expenseTotal }}<br/>
+      Status : {{ expense.expenseStatus }}
+    </ion-card-content>
+    <ion-fab class="btnDelete">
+      <ion-fab-button size="small" color="light">
+        <ion-icon class="btnDelete" name="trash" (click)="deleteExpense(expense.expenseId)"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-card>
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button>
+      <ion-icon class="btnDelete"name="add" size="large" (click)="createExpense()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
