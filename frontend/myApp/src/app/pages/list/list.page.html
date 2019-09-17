@@ -55,7 +55,7 @@
       </ion-item>
       <ion-button type="submit" color="primary">Filtrer</ion-button>
     </form>
-    
+
   <ion-card *ngFor="let expense of expenses" [disabled]="expense.expenseStatus==='Remboursé'" >
     <ion-item (click)="selectExpense(expense)">
       Date : {{ expense.expenseDate }}<br/>

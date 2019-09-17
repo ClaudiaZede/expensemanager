@@ -26,7 +26,6 @@ export class ListPage {
   public expensesStatus;
 
   missions: Mission[];
-  public data;
   public missionName = null;
   public selectedMissionName;
   public expenseType = null;
@@ -64,31 +63,23 @@ export class ListPage {
     this.router.navigateByUrl('/tabs/expense-details');
   }
 
+  activatedFilterChamps(champ) {
+    if (champ ===  null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   filterExpenses(form) {
     this.missionName = form.value.missionName;
     this.expenseType = form.value.expenseType;
     this.expenseDate = form.value.expenseDate;
     this.expenseStatus = form.value.expenseStatus;
-    if (this.missionName ===  null) {
-      this.activedMission = true;
-    } else {
-      this.activedMission = false;
-    }
-    if (this.expenseType === null) {
-      this.activedExpensetype = true;
-    } else {
-      this.activedExpensetype = false;
-    }
-    if (this.expenseDate === null) {
-      this.activedExpenseDate = true;
-    } else {
-      this.activedExpenseDate = false;
-    }
-    if (this.expenseStatus === null) {
-      this.activedExpenseStatus = true;
-    } else {
-      this.activedExpenseStatus = false;
-    }
+    this.activedMission = this.activatedFilterChamps(this.missionName);
+    this.activedExpensetype = this.activatedFilterChamps(this.expenseType);
+    this.activedExpenseDate = this.activatedFilterChamps(this.expenseDate);
+    this.activedExpenseStatus = this.activatedFilterChamps(this.expenseStatus);
     // tslint:disable-next-line: max-line-length
     this.apiService.readExpensesFilter(this.authService.user.userEmail, this.missionName, this.expenseType, this.expenseStatus, this.expenseDate).subscribe((expenses: Expense[]) => {
       this.expenses = expenses;
