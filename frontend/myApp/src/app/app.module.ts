@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP } from '@ionic-native/http/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -22,7 +23,8 @@ import { ReaderjsonService } from 'src/app/providers/readerjson.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ReaderjsonService
+    ReaderjsonService,
+    HTTP
   ],
   bootstrap: [AppComponent]
 })

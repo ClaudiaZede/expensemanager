@@ -66,6 +66,17 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'customer-details',
+        children:
+        [
+          {
+            path: '',
+            loadChildren: '../customer-details/customer-details.module#CustomerDetailsPageModule',
+
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/login',
         pathMatch: 'full'

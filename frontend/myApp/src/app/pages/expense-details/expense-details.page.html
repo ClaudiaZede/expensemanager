@@ -9,8 +9,8 @@
   <form #f = "ngForm" (ngSubmit)="createOrUpdateExpense(f)">
     <ion-item>
       <ion-select [(ngModel)]="expenseService.selectedExpense.missionName" name="missionName" 
-      multiple="false" placeholder="Mission" [selectedText]="selectedMissionName"
-      (ionChange)="missionSelected()">
+      multiple="false" placeholder="Mission" (ionChange)="missionSelected()"
+      [selectedText]="expenseService.selectedExpense.missionName">
         <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
           {{mission.missionName}}
         </ion-select-option>
@@ -18,18 +18,18 @@
     </ion-item>
     <ion-item>
       <ion-input type="text" name="societyName" placeholder="Société"
-      [(ngModel)] = "expenseService.selectedExpense.societyName" disabled></ion-input>
+      [(ngModel)]="expenseService.selectedExpense.societyName" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" name="customerLastName" placeholder="Client"
-      [(ngModel)] = "expenseService.selectedExpense.customerLastName" disabled></ion-input>
+      [(ngModel)]="expenseService.selectedExpense.customerLastName" disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-datetime type="text" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" name="expenseDate" [(ngModel)]="expenseService.selectedExpense.expenseDate" placeholder="Date"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-select [(ngModel)]="expenseService.selectedExpense.expenseType" name="expenseType" 
-      multiple="false" placeholder="Type" [selectedText]="selectedExpenseType">
+      multiple="false" placeholder="Type">
         <ion-select-option *ngFor="let type of expenseTypes" value="{{type}}">
           {{type}}
         </ion-select-option>

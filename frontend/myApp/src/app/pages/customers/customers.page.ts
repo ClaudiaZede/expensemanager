@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Mission } from 'src/app/models/mission';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -23,11 +24,9 @@ export class CustomersPage {
 
   public missionName = null;
   public societyName = null;
-  public selectedMissionName;
-  public selectedSocietyName;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private authService: AuthenticationService, private apiService: ApiService, private expenseService: ExpensesService, router: Router) {
+  constructor(private authService: AuthenticationService, private apiService: ApiService, private expenseService: ExpensesService, router: Router, private navCtrl: NavController) {
     this.router = router;
     this.activedFilters = true;
     this.activedMission = true;
@@ -42,27 +41,27 @@ export class CustomersPage {
 
   selectCustomer(mission: Mission) {
     this.expenseService.selectedMission = mission;
-    this.router.navigateByUrl('/tabs/expense-details');
+    this.router.navigateByUrl('/tabs/customer-details');
   }
 
   createCustomer() {
     this.expenseService.selectedMission = new Mission();
-    this.router.navigateByUrl('/tabs/expense-details');
+    this.router.navigateByUrl('/tabs/customer-details');
+  }
+
+  activatedFilterChamps(champ) {
+    if (champ ===  null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   filterCustomer(form) {
     this.missionName = form.value.missionName;
     this.societyName = form.value.societyName;
-    if (this.missionName ===  null) {
-      this.activedMission = true;
-    } else {
-      this.activedMission = false;
-    }
-    if (this.societyName ===  null) {
-      this.activedSociety = true;
-    } else {
-      this.activedSociety = false;
-    }
+    this.activedMission = this.activatedFilterChamps(this.missionName);
+    this.activedSociety = this.activatedFilterChamps(this.societyName);
     // tslint:disable-next-line: max-line-length
     this.apiService.readMissionsFilter(this.authService.user.userEmail, this.missionName, this.societyName).subscribe((missions: Mission[]) => {
       this.missions = missions;
@@ -79,7 +78,6 @@ export class CustomersPage {
       this.societyName = null;
       this.activedSociety = true;
     }
-
     if (this.missionName !== null || this.societyName !== null ) {
       // tslint:disable-next-line: max-line-length
       this.apiService.readMissionsFilter(this.authService.user.userEmail, this.missionName, this.societyName).subscribe((missions: Mission[]) => {
@@ -99,4 +97,9 @@ export class CustomersPage {
       this.activedFilters = true;
     }
   }
+
+  public goBack(animated = true) {
+    this.navCtrl.back();
+  }
+
 }

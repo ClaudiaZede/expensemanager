@@ -9,14 +9,13 @@ import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ReaderjsonService } from 'src/app/providers/readerjson.service';
 import { NavController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-expense-details',
-  templateUrl: './expense-details.page.html',
-  styleUrls: ['./expense-details.page.scss'],
+  selector: 'app-customer-details',
+  templateUrl: './customer-details.page.html',
+  styleUrls: ['./customer-details.page.scss'],
 })
-export class ExpenseDetailsPage implements OnInit {
+export class CustomerDetailsPage implements OnInit {
 
   public user: User;
   public router: Router;
@@ -35,17 +34,16 @@ export class ExpenseDetailsPage implements OnInit {
     });
   }
 
-  missionSelected() {
+  societySelected() {
     for (const mission of this.missions) {
-      if (mission.missionName === this.expenseService.selectedExpense.missionName) {
-        this.expenseService.selectedExpense.societyName = mission.societyName;
-        this.expenseService.selectedExpense.customerLastName = mission.customerLastName;
-        return this.expenseService.selectedExpense;
+      if (mission.societyName === this.expenseService.selectedMission.societyName) {
+        this.expenseService.selectedMission.missionName = mission.missionName;
+        return this.expenseService.selectedMission;
       }
     }
   }
 
-  getExpenseMissionId(missionName) {
+  getMissionId(missionName) {
     for (const mission of this.missions) {
       if (mission.missionName === missionName) {
         return mission.missionId;
@@ -53,24 +51,29 @@ export class ExpenseDetailsPage implements OnInit {
     }
   }
 
-  createOrUpdateExpense(form) {
-    if (this.expenseService.selectedExpense && this.expenseService.selectedExpense.expenseId) {
-      form.value.expenseId = this.expenseService.selectedExpense.expenseId;
-      // Change expenseDate to validated format
-      form.value.expenseDate = form.value.expenseDate.slice(0, 10);
-      form.value.missionId = this.getExpenseMissionId(form.value.missionName);
-      this.apiService.updateExpense(form.value).subscribe((expense: Expense) => {
-        console.log('Expense updated' , expense);
+  getSocietySiret(societyName) {
+    for (const mission of this.missions) {
+      if (mission.societyName === societyName) {
+        return mission.societySiret;
+      }
+    }
+  }
+
+  createOrUpdateCustomer(form) {
+    if (this.expenseService.selectedMission && this.expenseService.selectedMission.customerId) {
+      form.value.customerId = this.expenseService.selectedMission.customerId;
+      form.value.missionId = this.getMissionId(form.value.missionName);
+      form.value.societySiret = this.getMissionId(form.value.societyName);
+      this.apiService.updateCustomer(form.value).subscribe((mission: Mission) => {
+        console.log('Expense updated' , mission);
       });
     } else {
-      // Change expenseDate to validated format
-      form.value.expenseDate = form.value.expenseDate.slice(0, 10);
-      form.value.missionId = this.getExpenseMissionId(form.value.missionName);
-      this.apiService.createExpense(form.value).subscribe((expense: Expense) => {
-        console.log('Expense created, ', expense);
+      form.value.missionId = this.getMissionId(form.value.missionName);
+      this.apiService.createCustomer(form.value).subscribe((mission: Mission) => {
+        console.log('Expense created, ', mission);
       });
     }
-    this.router.navigateByUrl('/tabs/list');
+    this.router.navigateByUrl('/tabs/customers');
   }
 
   public goBack(animated = true) {
@@ -78,3 +81,4 @@ export class ExpenseDetailsPage implements OnInit {
   }
 
 }
+

@@ -49,4 +49,13 @@ export class ApiService {
     // tslint:disable-next-line: max-line-length
     return this.httpClient.get<Mission[]>(`${this.PHP_API_SERVER}/api/readMissionsFilter.php/?userEmail=${userEmail}&missionName=${missionName}&societyName=${societyName}`);
   }
+
+  createCustomer(mission: Mission): Observable<Mission> {
+    return this.httpClient.post<Mission>(`${this.PHP_API_SERVER}/api/createExpense.php`, mission);
+  }
+
+  updateCustomer(mission: Mission) {
+    return this.httpClient.put<Mission>(`${this.PHP_API_SERVER}/api/updateExpense.php`, mission);
+  }
+
 }

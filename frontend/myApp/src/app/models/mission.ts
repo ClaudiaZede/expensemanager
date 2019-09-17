@@ -5,6 +5,7 @@ export  class  Mission {
     private _customerId: string;
     private _customerLastName: string;
     private _customerFirstName: string;
+    private _societySiret: string;
     private _societyName: string;
 
     constructor(missionId?, missionName?, userEmail?, customerId?, customerLastName?, customerFirstName?, societyName?) {
@@ -14,6 +15,7 @@ export  class  Mission {
         this._customerId = customerId;
         this._customerLastName = customerLastName;
         this._customerFirstName = customerFirstName;
+        this._societyName = societyName;
         this._societyName = societyName;
     }
 
@@ -71,5 +73,13 @@ export  class  Mission {
     }
     set societyName(value: string) {
         this._societyName = value;
+    }
+
+    // Get and Set of societySiret
+    get societySiret() {
+        return this._societySiret;
+    }
+    set societySiret(value: string) {
+        this._societySiret = value;
     }
 }
