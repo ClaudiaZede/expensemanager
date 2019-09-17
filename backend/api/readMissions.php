@@ -21,6 +21,7 @@ if($result = mysqli_query($con,$sql))
     $missions[$i]['customerId'] = $row['customerId'];
     $missions[$i]['customerLastName'] = $row['customerLastName'];
     $missions[$i]['customerFirstName'] = $row['customerFirstName'];
+    $missions[$i]['societySiret'] = $row['societySiret'];
     $missions[$i]['societyName'] = $row['societyName'];
 
     $i++;
