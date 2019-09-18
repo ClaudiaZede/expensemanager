@@ -29,16 +29,8 @@ export class ApiService {
     return this.httpClient.get<Expense[]>(`${this.PHP_API_SERVER}/api/readExpensesFilter.php/?userEmail=${userEmail}&missionName=${missionName}&expenseType=${expenseType}&expenseStatus=${expenseStatus}&expenseDate=${expenseDate}`);
   }
 
-  createExpense(expense: Expense): Observable<Expense> {
-    return this.httpClient.post<Expense>(`${this.PHP_API_SERVER}/api/createExpense.php`, expense);
-  }
-
-  updateExpense(expense: Expense) {
-    return this.httpClient.put<Expense>(`${this.PHP_API_SERVER}/api/updateExpense.php`, expense);
-  }
-
-  deleteExpense(expenseId: number) {
-    return this.httpClient.delete<Expense>(`${this.PHP_API_SERVER}/api/deleteExpense.php/?expenseId=${expenseId}`);
+  readSocieties(): Observable<Mission[]> {
+    return this.httpClient.get<Mission[]>(`${this.PHP_API_SERVER}/api/readSocieties.php`);
   }
 
   readMissions(userEmail: string): Observable<Mission[]> {
@@ -50,12 +42,33 @@ export class ApiService {
     return this.httpClient.get<Mission[]>(`${this.PHP_API_SERVER}/api/readMissionsFilter.php/?userEmail=${userEmail}&missionName=${missionName}&societyName=${societyName}`);
   }
 
-  createCustomer(mission: Mission): Observable<Mission> {
-    return this.httpClient.post<Mission>(`${this.PHP_API_SERVER}/api/createExpense.php`, mission);
+
+
+
+  createExpense(expense: Expense): Observable<Expense> {
+    return this.httpClient.post<Expense>(`${this.PHP_API_SERVER}/api/createExpense.php`, expense);
   }
 
-  updateCustomer(mission: Mission) {
-    return this.httpClient.put<Mission>(`${this.PHP_API_SERVER}/api/updateExpense.php`, mission);
+  createMission(mission: Mission): Observable<Mission> {
+    return this.httpClient.post<Mission>(`${this.PHP_API_SERVER}/api/createMission.php`, mission);
+  }
+
+
+
+
+  updateExpense(expense: Expense) {
+    return this.httpClient.put<Expense>(`${this.PHP_API_SERVER}/api/updateExpense.php`, expense);
+  }
+
+  updateMission(mission: Mission) {
+    return this.httpClient.put<Mission>(`${this.PHP_API_SERVER}/api/updateMission.php`, mission);
+  }
+
+
+
+
+  deleteExpense(expenseId: number) {
+    return this.httpClient.delete<Expense>(`${this.PHP_API_SERVER}/api/deleteExpense.php/?expenseId=${expenseId}`);
   }
 
 }

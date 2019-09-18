@@ -30,7 +30,7 @@
   </div>
     <form [hidden]="activedFilters" #f = "ngForm" (ngSubmit)="filterExpenses(f)">
       <ion-item>
-        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission" [selectedText]="selectedMissionName">
+        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission">
           <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
             {{mission.missionName}}
           </ion-select-option>

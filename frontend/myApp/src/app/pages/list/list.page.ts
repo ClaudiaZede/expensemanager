@@ -27,7 +27,6 @@ export class ListPage {
 
   missions: Mission[];
   public missionName = null;
-  public selectedMissionName;
   public expenseType = null;
   public expenseDate = null;
   public expenseStatus = null;

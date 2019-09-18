@@ -55,23 +55,23 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'customers',
+        path: 'missions',
         children:
         [
           {
             path: '',
-            loadChildren: '../customers/customers.module#CustomersPageModule',
+            loadChildren: '../missions/missions.module#MissionsPageModule',
 
           }
         ]
       },
       {
-        path: 'customer-details',
+        path: 'mission-details',
         children:
         [
           {
             path: '',
-            loadChildren: '../customer-details/customer-details.module#CustomerDetailsPageModule',
+            loadChildren: '../mission-details/mission-details.module#MissionDetailsPageModule',
 
           }
         ]

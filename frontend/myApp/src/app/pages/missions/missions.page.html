@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title>Customers</ion-title>
-  </ion-toolbar>
+      <ion-title>Missions</ion-title>
+      <ion-icon class="buttonBack" slot="start" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -20,14 +21,14 @@
   </div>
     <form [hidden]="activedFilters" #f = "ngForm" (ngSubmit)="filterCustomer(f)">
       <ion-item>
-        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission" [selectedText]="selectedMissionName">
+        <ion-select [(ngModel)]="missionName" name="missionName" multiple="false" placeholder="Mission">
           <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
             {{mission.missionName}}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-select [(ngModel)]="societyName" name="societyName" multiple="false" placeholder="Société" [selectedText]="selectedSocietyName">
+        <ion-select [(ngModel)]="societyName" name="societyName" multiple="false" placeholder="Société">
           <ion-select-option *ngFor="let mission of missions" value="{{mission.societyName}}">
             {{mission.societyName}}
           </ion-select-option>
@@ -37,7 +38,7 @@
     </form>
     
   <ion-card *ngFor="let mission of missions">
-    <ion-card-content (click)="selectCustomer(mission)">
+    <ion-card-content (click)="selectMission(mission)">
       Client : {{ mission.customerLastName }} {{ mission.customerFirstName }}<br/>
       Société : {{ mission.societyName }}<br/>
       Mission : {{ mission.missionName }}
@@ -45,7 +46,7 @@
   </ion-card>
   <ion-fab vertical="top" horizontal="end" edge slot="fixed">
     <ion-fab-button>
-      <ion-icon class="btnDelete"name="add" size="large" (click)="createCustomer()"></ion-icon>
+      <ion-icon class="btnDelete"name="add" size="large" (click)="createMission()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

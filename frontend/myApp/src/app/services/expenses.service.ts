@@ -10,13 +10,7 @@ export class ExpensesService {
   public expenses: Expense[];
   public selectedExpense: Expense;
   public selectedMission: Mission;
-
-  public filters: any = {
-    missionName: '',
-    expenseType: '',
-    expenseDate: ''
-  };
-
+  public disabledChampsMission: boolean;
 
   public missions: Mission[];
   public expenseTypes: Array<string> = [

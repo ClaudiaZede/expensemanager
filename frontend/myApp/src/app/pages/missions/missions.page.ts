@@ -8,11 +8,11 @@ import { Mission } from 'src/app/models/mission';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: 'customers.page.html',
-  styleUrls: ['customers.page.scss']
+  selector: 'app-missions',
+  templateUrl: 'missions.page.html',
+  styleUrls: ['missions.page.scss']
 })
-export class CustomersPage {
+export class MissionsPage {
   public user: User;
   router: Router;
 
@@ -31,6 +31,7 @@ export class CustomersPage {
     this.activedFilters = true;
     this.activedMission = true;
     this.activedSociety = true;
+    this.expenseService.disabledChampsMission = true;
   }
 
   ionViewWillEnter() {
@@ -39,14 +40,16 @@ export class CustomersPage {
     });
   }
 
-  selectCustomer(mission: Mission) {
+  selectMission(mission: Mission) {
     this.expenseService.selectedMission = mission;
-    this.router.navigateByUrl('/tabs/customer-details');
+    this.router.navigateByUrl('/tabs/mission-details');
   }
 
-  createCustomer() {
+  createMission() {
+    console.log(this.expenseService.disabledChampsMission);
     this.expenseService.selectedMission = new Mission();
-    this.router.navigateByUrl('/tabs/customer-details');
+    this.expenseService.disabledChampsMission = false;
+    this.router.navigateByUrl('/tabs/mission-details');
   }
 
   activatedFilterChamps(champ) {
