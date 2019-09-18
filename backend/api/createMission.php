@@ -16,17 +16,16 @@ if(isset($postdata) && !empty($postdata))
   } else {
 
     // Sanitize mission
-    $customerId = mysqli_real_escape_string($con, (int)$request->customerId);
     $missionName = mysqli_real_escape_string($con, trim($request->missionName));
     $userEamil = mysqli_real_escape_string($con, trim($request->userEamil));
+    $customerId = mysqli_real_escape_string($con, (int)$request->customerId);
 
 
     // Create mission
-    $sql = "INSERT INTO mission (missionName, customerId, userEmail)
-            VALUE ('{$missionName}', '{$customerId}', '{$userEmail}')";
-
+    $sql = "INSERT INTO `MISSION` (`missionName`, `userEmail`, `customerId`) 
+            VALUES ('{$missionName}', '{$userEmail}', '{$customerId}')";
   }
-  
+    
   if(mysqli_query($con,$sql))
   {
     http_response_code(201);

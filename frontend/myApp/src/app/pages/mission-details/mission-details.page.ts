@@ -59,7 +59,6 @@ export class MissionDetailsPage implements OnInit {
       form.value.missionId = this.expenseService.selectedMission.missionId;
       form.value.userEmail = this.authService.user.userEmail;
       form.value.customerId = this.getCustomerId(this.expenseService.selectedMission.customerLastName);
-      console.log(form.value);
       this.apiService.updateMission(form.value).subscribe((mission: Mission) => {
         console.log('Expense updated' , mission);
       });

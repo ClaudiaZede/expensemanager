@@ -25,15 +25,15 @@ export class LoginPage implements OnInit {
     // tslint:disable-next-line: object-literal-key-quotes
     // Email types and messages error
     'userEmail': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please enter a valid email.' }
+      { type: 'required', message: 'Email obligatoire.' },
+      { type: 'pattern', message: 'Email ne pas valide.' }
     ],
     // tslint:disable-next-line: object-literal-key-quotes
     // Password types and messages error
     'userPassword': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+      { type: 'required', message: 'Password obligatoire.' },
+      { type: 'minlength', message: 'Minimun 5 caractères.' },
+      { type: 'pattern', message: 'Au moins une majuscule, une minuscule et un numéro.' }
     ],
   };
 

@@ -55,6 +55,9 @@ export class ApiService {
 
 
 
+  updateUserPassword(user: User) {
+    return this.httpClient.put<User>(`${this.PHP_API_SERVER}/api/updateUserPassword.php`, user);
+  }
 
   updateExpense(expense: Expense) {
     return this.httpClient.put<Expense>(`${this.PHP_API_SERVER}/api/updateExpense.php`, expense);

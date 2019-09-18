@@ -66,6 +66,17 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'password',
+        children:
+        [
+          {
+            path: '',
+            loadChildren: '../password/password.module#PasswordPageModule',
+
+          }
+        ]
+      },
+      {
         path: 'mission-details',
         children:
         [

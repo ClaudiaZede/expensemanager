@@ -1,27 +1,27 @@
 <ion-content>
   <ion-img src="/assets/logotypeEM.png"></ion-img>
   <form [formGroup]="validationsForm" #f = "ngForm" (ngSubmit)="login(f)">
-      <ion-item>
+        <ion-item>
           <ion-label position="floating">Email</ion-label>
           <ion-input type="userEmail" formControlName="userEmail"></ion-input>
-      </ion-item>
-      <div>
+        </ion-item>
+        <div>
           <ng-container *ngFor="let validation of validationMessages.userEmail">
               <div *ngIf="validationsForm.get('userEmail').hasError(validation.type) && (validationsForm.get('userEmail').dirty || validationsForm.get('userEmail').touched)">
                   {{ validation.message }}
               </div>
            </ng-container>
-       </div>
-      <ion-item>
+        </div>
+        <ion-item>
           <ion-label position="floating">Password</ion-label>
               <ion-input type="password" formControlName="userPassword"></ion-input>
-          </ion-item>
+        </ion-item>
           <div>
-              <ng-container *ngFor="let validation of validationMessages.userPassword">
+            <ng-container *ngFor="let validation of validationMessages.userPassword">
               <div *ngIf="validationsForm.get('userPassword').hasError(validation.type) && (validationsForm.get('userPassword').dirty || validationsForm.get('userPassword').touched)">
                   {{ validation.message }}
               </div>
-              </ng-container>
+            </ng-container>
           </div>
       <ion-text color="danger" *ngIf="alert" class="error">{{ alert }}</ion-text>
 
