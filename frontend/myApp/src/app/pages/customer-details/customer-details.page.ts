@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ExpensesService } from 'src/app/services/expenses.service';
 import { Expense } from 'src/app/models/expense';
-import { Mission } from 'src/app/models/mission';
+import { Mission } from 'src/app/models/customer';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ReaderjsonService } from 'src/app/providers/readerjson.service';
 import { NavController } from '@ionic/angular';
+import { Society } from 'src/app/models/society';
 
 @Component({
   selector: 'app-customer-details',
@@ -21,6 +22,7 @@ export class CustomerDetailsPage implements OnInit {
   public router: Router;
   public expenseTypes;
   missions: Mission[];
+  societies: Society[];
 
   // tslint:disable-next-line: max-line-length
   constructor(private authService: AuthenticationService, private apiService: ApiService, public expenseService: ExpensesService, router: Router, private navCtrl: NavController, public readerjsonService: ReaderjsonService) {
@@ -32,15 +34,10 @@ export class CustomerDetailsPage implements OnInit {
     this.apiService.readMissions(this.authService.user.userEmail).subscribe((missions: Mission[]) => {
       this.missions = missions;
     });
-  }
+    this.apiService.readSocieties().subscribe((societies: Society[]) => {
+      this.societies = societies;
+    });
 
-  societySelected() {
-    for (const mission of this.missions) {
-      if (mission.societyName === this.expenseService.selectedMission.societyName) {
-        this.expenseService.selectedMission.missionName = mission.missionName;
-        return this.expenseService.selectedMission;
-      }
-    }
   }
 
   getMissionId(missionName) {
@@ -52,9 +49,9 @@ export class CustomerDetailsPage implements OnInit {
   }
 
   getSocietySiret(societyName) {
-    for (const mission of this.missions) {
-      if (mission.societyName === societyName) {
-        return mission.societySiret;
+    for (const society of this.societies) {
+      if (society.societyName === societyName) {
+        return society.societySiret;
       }
     }
   }

@@ -17,16 +17,19 @@
     </ion-item>
     <ion-item>
       <ion-select [(ngModel)]="expenseService.selectedMission.societyName" name="societyName" 
-      multiple="false" placeholder="Société" (ionChange)="societySelected()"
-      [selectedText]="expenseService.selectedMission.societyName">
-        <ion-select-option *ngFor="let mission of missions" value="{{mission.societyName}}">
-          {{mission.societyName}}
+      multiple="false" placeholder="Société" [selectedText]="expenseService.selectedMission.societyName">
+        <ion-select-option *ngFor="let society of societies" value="{{society.societyName}}">
+          {{society.societyName}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-input type="text" name="Mission" placeholder="missionName"
-      [(ngModel)] = "expenseService.selectedMission.missionName" disabled></ion-input>
+      <ion-select [(ngModel)]="expenseService.selectedMission.missionName" name="missionName" 
+      multiple="false" placeholder="Mission" [selectedText]="expenseService.selectedMission.missionName">
+        <ion-select-option *ngFor="let mission of missions" value="{{mission.missionName}}">
+          {{mission.missionName}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-button type="submit" color="primary">Save</ion-button>
   </form>
